@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+
+<h2>Create Verzus</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()
+
+<p>When it comes to 
+    <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="0" /> 
+    <input data-vs-id="verzusitemcontext" name="verzusitemcontexttext" data-auto="1" id="verzusitemcontexttext" type="text" />
+    I'd definitely choose 
+    <input id="verzusitem1" name="verzusitem1" type="hidden" value="0" />
+    <input data-vs-id="verzusitem1" name="verzusitem1text" data-auto="1" id="verzusitem1text" type="text" />
+    over 
+    <input id="verzusitem2" name="verzusitem2" type="hidden" value="0" />
+    <input data-vs-id="verzusitem2" name="verzusitem2text" data-auto="1" id="verzusitem2text" type="text" /> !
+    <button type="submit">Create Verzus</button>
+</p>
+    
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+
+}

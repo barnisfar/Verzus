@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@ViewBag.item1Content vs @ViewBag.item2Content</h1>
+@ViewBag.date
+
+<p>When it comes to <span>@ViewBag.itemCContent</span> <span id="more-contexts" data-context="more"></span> we'd definitely choose <span>@ViewBag.item1Content</span> over <span>@ViewBag.item2Content</span></p>
+<div id="details"></div>
+
+@section Verzusscripts {
+<script type="text/javascript">    
+    
+    var item1 = @ViewBag.item1Id;
+    var item2 = @ViewBag.item2Id;
+    var itemC = @ViewBag.itemCId;
+    var numberOfContexts = 0;
+
+    $(document).ready(function() {
+
+        $.ajax({
+            url: "@Url.Action("Search", "Verzus")",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: "{ item1: "+item1+", item2: "+item2+", context:"+itemC+" }",
+            success: function (data) {
+                listStats(data, $('#details'), "person(s) agree(s)");
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("Search", "Verzus")",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: "{ item1: "+item2+", item2: "+item1+", context:"+itemC+" }",
+            success: function (data) {
+                listStats(data, $('#details'), "person(s) disagree(s)");
+            }
+        });
+
+        $.ajax({
+            url: "@Url.Action("Search", "Verzus")",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: "{ item1: "+item1+", item2: "+item2+", context:0 }",
+            success: function (data) {
+                if (data.length > 1)
+                    $('#more-contexts').html("(and "+(data.length-1)+" other matters)");
+            }
+        });
+
+    });
+
+    function listStats(data, target, titleSuffix) {
+        target.append("<h2>"+data.length+" "+titleSuffix+"</h2>");
+        for (var i in data) {
+            target.append("<p>"+data[i].VerzusDateAdded+"</p>");
+        }
+    }
+</script>
+}

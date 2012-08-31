@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="aspnet-Verzus-20120828131727" Class="VerzusLinqSqlDataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDb)\v11.0;AttachDbFilename=|DataDirectory|\aspnet-Verzus-20120828131727.mdf;Initial Catalog=aspnet-Verzus-20120828131727;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="aspnet_Verzus_20120828131727ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Verzus" Member="Verzus">
+    <Type Name="Verzus">
+      <Column Name="VerzusId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="VerzusItem1" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="VerzusItem2" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="VerzusItemContext" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="VerzusUrlKey" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="VerzusCreatedBy" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="VerzusDateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="VerzusItem_Verzus" Member="VerzusItem" ThisKey="VerzusItem1" OtherKey="ItemId" Type="VerzusItem" IsForeignKey="true" />
+      <Association Name="VerzusItem_Verzus1" Member="VerzusItem3" ThisKey="VerzusItem2" OtherKey="ItemId" Type="VerzusItem" IsForeignKey="true" />
+      <Association Name="VerzusItem_Verzus2" Member="VerzusItem4" ThisKey="VerzusItemContext" OtherKey="ItemId" Type="VerzusItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VerzusItemType" Member="VerzusItemTypes">
+    <Type Name="VerzusItemType">
+      <Column Name="ItemTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ItemTypeDesc" Type="System.String" DbType="NChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="VerzusItemType_VerzusItem" Member="VerzusItems" ThisKey="ItemTypeId" OtherKey="ItemType" Type="VerzusItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VerzusItem" Member="VerzusItems">
+    <Type Name="VerzusItem">
+      <Column Name="ItemId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ItemType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ItemContent" Type="System.String" DbType="NChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="VerzusItem_Verzus" Member="Verzus" ThisKey="ItemId" OtherKey="VerzusItem1" Type="Verzus" />
+      <Association Name="VerzusItem_Verzus1" Member="Verzus1" ThisKey="ItemId" OtherKey="VerzusItem2" Type="Verzus" />
+      <Association Name="VerzusItem_Verzus2" Member="Verzus2" ThisKey="ItemId" OtherKey="VerzusItemContext" Type="Verzus" />
+      <Association Name="VerzusItemType_VerzusItem" Member="VerzusItemType" ThisKey="ItemType" OtherKey="ItemTypeId" Type="VerzusItemType" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

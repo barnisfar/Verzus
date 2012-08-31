@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("Your logo here", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Create", "Create", "Verzus")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+                <div class="float-right">
+                    <ul id="social">
+                        <li><a href="http://facebook.com" class="facebook">Facebook</a></li>
+                        <li><a href="http://twitter.com" class="twitter">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                
+                var cache = {},
+                    lastXhr;
+
+
+                $("input[data-auto]").each(function (i, el) {
+                    $(el).autocomplete({
+                        minLength: 2,
+                        source: function (request, response) {
+                            var term = request.term;
+                            if (term in cache) {
+                                response(cache[term]);
+                                return;
+                            }
+
+                            lastXhr = $.ajax({
+                                url: "../VerzusItem/Search/" + term,
+                                type: "POST",
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data, status, xhr) {
+                                    cache[term] = data;
+                                    if (xhr === lastXhr) {
+                                        response(data);
+                                    }
+                                }
+                            });
+                        },
+                        focus: function (event, ui) {
+                            var input = $(this);
+                            input.val(ui.item.ItemContent.trim());
+                            return false;
+                        },
+                        select: function (event, ui) {
+                            var input = $(this);
+                            input.val(ui.item.ItemContent.trim());
+                            $('#' + input.data('vs-id')).val(ui.item.ItemId);
+                            //$("#project-description").html(ui.item.desc);
+                            //$("#project-icon").attr("src", "images/" + ui.item.icon);
+
+                            return false;
+                        },
+                        change: function (event, ui) {
+                            $(cache).each(function (i, item) {
+                                console.dir();
+                                //if ($(item).ItemContent == $(event.target).val()) { alert("test");}
+                            });
+                        }
+                    }).data("autocomplete")._renderItem = function (ul, item) {
+                        return $("<li></li>")
+                            .data("item.autocomplete", item)
+                            .append("<a>" + item.ItemContent + "</a>")
+                            .appendTo(ul);
+                    };
+                });
+            });
+
+        </script>
+
+
+        @RenderSection("scripts", required: false)
+        @RenderSection("verzusscripts", required: false)
+    </body>
+</html>
