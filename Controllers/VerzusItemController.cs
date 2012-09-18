@@ -43,6 +43,20 @@ namespace Verzus.Controllers
         }
 
         //
+        // POST: /VerzusItem/Search
+        [HttpPost]
+        public JsonResult SearchByIds(List<int> idList)
+        {
+            var vsItems = from vsi in c.VerzusItems where (idList.Contains((int)vsi.ItemId)) select vsi;
+            List<object> list = new List<object>();
+            foreach (Models.VerzusItem item in vsItems)
+            {
+                list.Add(new { ItemId = item.ItemId, ItemType = item.ItemType, ItemContent = item.ItemContent, ItemDateAdded = item.ItemDateAdded });
+            }
+            return Json(list);
+        }
+
+        //
         // GET: /VerzusItem/Create
 
         public ActionResult Create()

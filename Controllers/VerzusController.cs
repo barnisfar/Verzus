@@ -73,7 +73,7 @@ namespace Verzus.Controllers
             List<object> list = new List<object>();
             foreach (Models.Verzus item in vsEnum)
             {
-                list.Add(new { VerzusId = item.VerzusId, VerzusDateAdded = item.VerzusDateAdded });
+                list.Add(new { VerzusId = item.VerzusId, VerzusItem1 = item.VerzusItem1, VerzusItem2 = item.VerzusItem2, VerzusItemContext = item.VerzusItemContext, VerzusDateAdded = item.VerzusDateAdded });
             }
 
             return Json(list);
