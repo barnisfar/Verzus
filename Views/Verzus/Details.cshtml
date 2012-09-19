@@ -1,28 +1,35 @@
 ﻿@{
     ViewBag.Title = "Details";
 }
+<div class="verzus">
+    <a href="@Url.Action("Get", "Verzus", new { id = @ViewBag.urlKey })" title="@ViewBag.item1Content vs @ViewBag.item2Content"><h1>@ViewBag.item1Content vs @ViewBag.item2Content</h1></a>
+    <span>Last added @ViewBag.date</span>
 
-<a href="@Url.Action("Get", "Verzus", new { id = @ViewBag.urlKey })" title="@ViewBag.item1Content vs @ViewBag.item2Content"><h1>@ViewBag.item1Content vs @ViewBag.item2Content</h1></a>
-<span>Last added @ViewBag.date</span>
-
-<p>When it comes to 
-    <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="@ViewBag.itemCId" /> 
-    <input value="@ViewBag.itemCContent" data-vs-id="verzusitemcontext" data-vs-more="" data-vs-more-info="more-context" name="verzusitemcontexttext" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitemcontexttext" type="text" />
-    <span id="more-context" data-context="more"></span>
-    We'd definitely choose 
-    <input id="verzusitem1" name="verzusitem1" type="hidden" value="@ViewBag.item1Id" />
-    <input value="@ViewBag.item1Content" data-vs-id="verzusitem1" data-vs-more="" data-vs-more-info="more-item1" name="verzusitem1text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem1text" type="text" />
-    <span id="more-item1" data-context="more"></span>
-    over 
-    <input id="verzusitem2" name="verzusitem2" type="hidden" value="@ViewBag.item2Id" />
-    <input value="@ViewBag.item2Content" data-vs-id="verzusitem2" data-vs-more="" data-vs-more-info="more-item2" name="verzusitem2text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem2text" type="text" /> !
-    <span id="more-item2" data-context="more"></span>
-</p>
-<div class="details">
-    <div id="agree-pool"></div>
-    <div id="disagree-pool"></div>
+    <p>When it comes to 
+        <span class="verzus-item">
+            <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="@ViewBag.itemCId" /> 
+            <input value="@ViewBag.itemCContent" data-vs-id="verzusitemcontext" data-vs-more="" data-vs-more-info="more-context" name="verzusitemcontexttext" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitemcontexttext" type="text" />
+            <br /><span id="more-context" data-context="more">&nbsp;</span>
+        </span>
+        We'd prefer 
+        <span class="verzus-item">
+            <input id="verzusitem1" name="verzusitem1" type="hidden" value="@ViewBag.item1Id" />
+            <input value="@ViewBag.item1Content" data-vs-id="verzusitem1" data-vs-more="" data-vs-more-info="more-item1" name="verzusitem1text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem1text" type="text" />
+            <br /><span id="more-item1" data-context="more">&nbsp;</span>
+        </span>
+        over 
+        <span class="verzus-item">
+            <input id="verzusitem2" name="verzusitem2" type="hidden" value="@ViewBag.item2Id" />
+            <input value="@ViewBag.item2Content" data-vs-id="verzusitem2" data-vs-more="" data-vs-more-info="more-item2" name="verzusitem2text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem2text" type="text" />
+            <br /><span id="more-item2" data-context="more">&nbsp;</span>
+        </span>
+        !
+    </p>
+    <div class="details">
+        <div id="agree-pool"></div>
+        <div id="disagree-pool"></div>
+    </div>
 </div>
-
 @section Scripts {
 <script type="text/javascript">    
     

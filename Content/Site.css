@@ -767,3 +767,33 @@ tr.pager td {
             text-indent: 0;
         }
 }
+/* Verzus Items */
+.verzus-item {
+    display:inline-block;
+    height:120px;
+    width:auto;
+    background:#555;
+    padding:10px;
+}
+
+.verzus-item input {
+    font-family:"Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size:30px;
+    font-weight:bold;
+    border:none;
+    color:#fff;
+    background:none;
+    width:180px;
+}
+
+    .verzus-item span {
+        font-family:"Segoe UI", Verdana, Helvetica, Sans-Serif;
+        font-size:14px;
+        
+    }
+
+.verzus p {
+    font-family:Georgia, serif;
+    font-style:italic;
+    font-size:24px;
+}
