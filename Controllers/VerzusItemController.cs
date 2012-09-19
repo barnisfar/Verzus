@@ -24,7 +24,7 @@ namespace Verzus.Controllers
         {
             var vsItem = from vsi in c.VerzusItems where (vsi.ItemId == id) select vsi;
             Models.VerzusItem jsItem = vsItem.First();
-            JsonResult r = Json(new { ItemId = jsItem.ItemId, ItemType = jsItem.ItemType, ItemContent = jsItem.ItemContent, ItemDateAdded = jsItem.ItemDateAdded });
+            JsonResult r = Json(new { ItemId = jsItem.ItemId, ItemType = jsItem.ItemType, ItemContent = jsItem.ItemContent.Trim(), ItemDateAdded = jsItem.ItemDateAdded });
             return r;
         }
 
@@ -34,11 +34,9 @@ namespace Verzus.Controllers
         public JsonResult Search(string id)
         {
             var vsItems = from vsi in c.VerzusItems where (vsi.ItemContent.Contains(id)) select vsi;
-            List<object> list = new List<object>();
-            foreach (Models.VerzusItem item in vsItems)
-            {
-                list.Add(new { ItemId = item.ItemId, ItemType = item.ItemType, ItemContent = item.ItemContent, ItemDateAdded = item.ItemDateAdded });
-            }
+            
+            List<object> list = pack(vsItems);
+            
             return Json(list);
         }
 
@@ -48,12 +46,55 @@ namespace Verzus.Controllers
         public JsonResult SearchByIds(List<int> idList)
         {
             var vsItems = from vsi in c.VerzusItems where (idList.Contains((int)vsi.ItemId)) select vsi;
+            
+            List<object> list = pack(vsItems);
+            
+            return Json(list);
+        }
+
+        //
+        // POST: /VerzusItem/Matters
+        [HttpPost]
+        public JsonResult JMatters()
+        {
+            var vsItems = from vsi in c.VerzusItems where vsi.ItemIsContext == 1 select vsi;
+            
+            List<object> list = pack(vsItems);
+            
+            return Json(list);
+        }
+
+        //
+        // GET: /VerzusItem/Matters
+        public ActionResult Matters()
+        {
+            var vsItems = from vsi in c.VerzusItems where vsi.ItemIsContext == 1 select vsi;
+
+            ViewBag.VerzusItems = vsItems;
+            ViewBag.Title = "Matters";
+
+            return View("Subjects");
+        }
+
+        //
+        // GET: /VerzusItem/Matters
+        public ActionResult Competitors()
+        {
+            var vsItems = from vsi in c.VerzusItems where vsi.ItemIsSubject == 1 select vsi;
+
+            ViewBag.VerzusItems = vsItems;
+            ViewBag.Title = "Competitors";
+
+            return View("Subjects");
+        }
+
+        private List<object> pack(IQueryable vsItems) {
             List<object> list = new List<object>();
             foreach (Models.VerzusItem item in vsItems)
             {
-                list.Add(new { ItemId = item.ItemId, ItemType = item.ItemType, ItemContent = item.ItemContent, ItemDateAdded = item.ItemDateAdded });
+                list.Add(new { ItemId = item.ItemId, ItemType = item.ItemType, ItemContent = item.ItemContent.Trim(), ItemDateAdded = item.ItemDateAdded });
             }
-            return Json(list);
+            return list;
         }
 
         //

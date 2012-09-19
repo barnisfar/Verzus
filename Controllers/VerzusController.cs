@@ -46,6 +46,7 @@ namespace Verzus.Controllers
             ViewBag.item1Content = vsi1.ItemContent;
             ViewBag.item2Content = vsi2.ItemContent;
             ViewBag.itemCContent = vsiC.ItemContent;
+            ViewBag.urlKey = vs.VerzusUrlKey;
 
             return View("Details");
         }
@@ -62,7 +63,7 @@ namespace Verzus.Controllers
         // POST: /Verzus/Search
 
         [HttpPost]
-        public JsonResult Search(int item1, int item2, int context)
+        public JsonResult JSearch(int item1, int item2, int context)
         {
             IEnumerable<Models.Verzus> vsEnum = (from v in c.Verzus select v);
 
@@ -73,10 +74,30 @@ namespace Verzus.Controllers
             List<object> list = new List<object>();
             foreach (Models.Verzus item in vsEnum)
             {
-                list.Add(new { VerzusId = item.VerzusId, VerzusItem1 = item.VerzusItem1, VerzusItem2 = item.VerzusItem2, VerzusItemContext = item.VerzusItemContext, VerzusDateAdded = item.VerzusDateAdded });
+                list.Add(new { VerzusId = item.VerzusId, VerzusUrlKey = item.VerzusUrlKey.Trim(), VerzusItem1 = item.VerzusItem1, VerzusItem2 = item.VerzusItem2, VerzusItemContext = item.VerzusItemContext, VerzusDateAdded = item.VerzusDateAdded });
             }
 
             return Json(list);
+        }
+
+        //
+        // GET: /Verzus/Search
+
+        public ActionResult Search(string itemContent)
+        {
+            var vsEnum =    from vs in c.Verzus
+                            join vsi1 in c.VerzusItems on vs.VerzusItem1 equals vsi1.ItemId
+                            join vsi2 in c.VerzusItems on vs.VerzusItem2 equals vsi2.ItemId
+                            join vsiC in c.VerzusItems on vs.VerzusItemContext equals vsiC.ItemId
+                            where SqlMethods.Like(vsi1.ItemContent, itemContent)
+                            || SqlMethods.Like(vsi2.ItemContent, itemContent)
+                            || SqlMethods.Like(vsiC.ItemContent, itemContent)
+                            select new Verzus.Models.VerzusStructure { vs = vs, vsi1 = vsi1, vsi2 = vsi2, vsiC = vsiC };
+
+            ViewBag.ItemContent = itemContent;
+            ViewBag.VerzusList = vsEnum;
+
+            return View();
         }
 
         //
@@ -109,6 +130,8 @@ namespace Verzus.Controllers
                 vsItem2.ItemContent = collection["verzusitem2text"];
                 vsItemC.ItemContent = collection["verzusitemcontexttext"];
 
+
+
                 List<Models.VerzusItem> createdVerzusItems = new List<Models.VerzusItem>();
                 createdVerzusItems.Add(vsItem1);
                 createdVerzusItems.Add(vsItem2);
@@ -116,10 +139,10 @@ namespace Verzus.Controllers
 
                 Models.Verzus vs = new Models.Verzus();
 
-                vs.VerzusItem1 = this.saveAndGetId(vsItem1);
-                vs.VerzusItem2 = this.saveAndGetId(vsItem2);
-                vs.VerzusItemContext = this.saveAndGetId(vsItemC);
-                vs.VerzusUrlKey = vsItem1.ItemContent + "-vs-" + vsItem2.ItemContent;
+                vs.VerzusItem1 = this.saveAndGetId(vsItem1, false);
+                vs.VerzusItem2 = this.saveAndGetId(vsItem2, false);
+                vs.VerzusItemContext = this.saveAndGetId(vsItemC, true);
+                vs.VerzusUrlKey = vsItem1.ItemContent.Trim() + "-vs-" + vsItem2.ItemContent.Trim();
                 vs.VerzusDateAdded = DateTime.Now;
                 c.Verzus.InsertOnSubmit(vs);
                 
@@ -136,11 +159,19 @@ namespace Verzus.Controllers
             }
         }
 
-        private long saveAndGetId(Models.VerzusItem newItem)
+        private long saveAndGetId(Models.VerzusItem newItem, bool isContext)
         {
             IEnumerable<Models.VerzusItem> exist = from i in c.VerzusItems where SqlMethods.Like(i.ItemContent.Trim(), newItem.ItemContent) select i;
             if (exist.Any())
+            {
+                if (isContext)
+                    exist.First().ItemIsContext = 1;
+                else exist.First().ItemIsSubject = 1;
+
+                c.SubmitChanges();
+                
                 return exist.First().ItemId;
+            }
             
             newItem.ItemType = 1;
 
@@ -148,7 +179,7 @@ namespace Verzus.Controllers
             c.VerzusItems.InsertOnSubmit(newItem);
             c.SubmitChanges();
 
-            return saveAndGetId(newItem);
+            return saveAndGetId(newItem, isContext);
         }
 
         //
@@ -201,6 +232,16 @@ namespace Verzus.Controllers
             {
                 return View();
             }
+        }
+
+        private List<object> pack(IQueryable vsItems)
+        {
+            List<object> list = new List<object>();
+            foreach (Models.VerzusItem item in vsItems)
+            {
+                list.Add(new { ItemId = item.ItemId, ItemType = item.ItemType, ItemContent = item.ItemContent.Trim(), ItemDateAdded = item.ItemDateAdded });
+            }
+            return list;
         }
     }
 }

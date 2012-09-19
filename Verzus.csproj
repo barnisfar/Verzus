@@ -148,14 +148,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\VerzusLinqSql.cs">
-      <DependentUpon>VerzusLinqSql.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Models\VerzusLinqSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VerzusLinqSql.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\VerzusStructure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +266,8 @@
     <Content Include="Views\Verzus\Index.cshtml" />
     <Content Include="Views\Verzus\Create.cshtml" />
     <Content Include="Views\Verzus\Details.cshtml" />
+    <Content Include="Views\VerzusItem\Subjects.cshtml" />
+    <Content Include="Views\Verzus\Search.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -612,6 +612,10 @@ namespace Verzus.Models
 		
 		private System.DateTime _ItemDateAdded;
 		
+		private byte _ItemIsSubject;
+		
+		private byte _ItemIsContext;
+		
 		private EntitySet<Verzus> _Verzus;
 		
 		private EntitySet<Verzus> _Verzus1;
@@ -634,6 +638,10 @@ namespace Verzus.Models
     partial void OnItemContentChanged();
     partial void OnItemDateAddedChanging(System.DateTime value);
     partial void OnItemDateAddedChanged();
+    partial void OnItemIsSubjectChanging(byte value);
+    partial void OnItemIsSubjectChanged();
+    partial void OnItemIsContextChanging(byte value);
+    partial void OnItemIsContextChanged();
     #endregion
 		
 		public VerzusItem()
@@ -729,8 +737,50 @@ namespace Verzus.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemIsSubject", DbType="TinyInt NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+		public byte ItemIsSubject
+		{
+			get
+			{
+				return this._ItemIsSubject;
+			}
+			set
+			{
+				if ((this._ItemIsSubject != value))
+				{
+					this.OnItemIsSubjectChanging(value);
+					this.SendPropertyChanging();
+					this._ItemIsSubject = value;
+					this.SendPropertyChanged("ItemIsSubject");
+					this.OnItemIsSubjectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemIsContext", DbType="TinyInt NOT NULL")]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+		public byte ItemIsContext
+		{
+			get
+			{
+				return this._ItemIsContext;
+			}
+			set
+			{
+				if ((this._ItemIsContext != value))
+				{
+					this.OnItemIsContextChanging(value);
+					this.SendPropertyChanging();
+					this._ItemIsContext = value;
+					this.SendPropertyChanged("ItemIsContext");
+					this.OnItemIsContextChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="VerzusItem_Verzus", Storage="_Verzus", ThisKey="ItemId", OtherKey="VerzusItem1")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
 		public EntitySet<Verzus> Verzus
 		{
 			get
@@ -749,7 +799,7 @@ namespace Verzus.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="VerzusItem_Verzus1", Storage="_Verzus1", ThisKey="ItemId", OtherKey="VerzusItem2")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
 		public EntitySet<Verzus> Verzus1
 		{
 			get
@@ -768,7 +818,7 @@ namespace Verzus.Models
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="VerzusItem_Verzus2", Storage="_Verzus2", ThisKey="ItemId", OtherKey="VerzusItemContext")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9, EmitDefaultValue=false)]
 		public EntitySet<Verzus> Verzus2
 		{
 			get

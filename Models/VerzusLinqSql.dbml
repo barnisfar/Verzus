@@ -27,6 +27,8 @@
       <Column Name="ItemType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ItemContent" Type="System.String" DbType="NChar(300) NOT NULL" CanBeNull="false" />
       <Column Name="ItemDateAdded" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ItemIsSubject" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ItemIsContext" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
       <Association Name="VerzusItem_Verzus" Member="Verzus" ThisKey="ItemId" OtherKey="VerzusItem1" Type="Verzus" />
       <Association Name="VerzusItem_Verzus1" Member="Verzus1" ThisKey="ItemId" OtherKey="VerzusItem2" Type="Verzus" />
       <Association Name="VerzusItem_Verzus2" Member="Verzus2" ThisKey="ItemId" OtherKey="VerzusItemContext" Type="Verzus" />

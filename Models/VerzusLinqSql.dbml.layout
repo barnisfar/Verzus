@@ -2,50 +2,50 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="VerzusLinqSql">
   <DataContextMoniker Name="/VerzusLinqSqlDataContext" />
   <nestedChildShapes>
-    <classShape Id="b0c6750d-7d6a-42a0-ba64-44303498b439" absoluteBounds="6.25, 1, 2, 1.9178898111979166">
+    <classShape Id="abf01ee4-f623-4ef8-875a-989b8e403300" absoluteBounds="6.25, 0.875, 2, 1.9178898111979166">
       <DataClassMoniker Name="/VerzusLinqSqlDataContext/Verzus" />
       <nestedChildShapes>
-        <elementListCompartment Id="34c38e5a-70e8-4aaf-a43e-83e6b26c0749" absoluteBounds="6.265, 1.46, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="33d32189-119a-452f-8015-15d37589bc87" absoluteBounds="6.265, 1.335, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4f49c915-a245-4a5f-80ee-531b82d245bc" absoluteBounds="0.75, 1.375, 2, 1.0961531575520831">
+    <classShape Id="a165195e-2bb0-454b-a2da-f87569556f85" absoluteBounds="0.75, 1.375, 2, 1.0961531575520835">
       <DataClassMoniker Name="/VerzusLinqSqlDataContext/VerzusItemType" />
       <nestedChildShapes>
-        <elementListCompartment Id="ee743f72-0f89-40e4-8cd8-9a6ded56e6ab" absoluteBounds="0.765, 1.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="c9cfc7c9-06f4-4980-84b5-728e40e6b044" absoluteBounds="0.765, 1.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="ea98d290-4bc8-4408-94ea-73956719e689" absoluteBounds="3.5, 1.25, 2, 1.424847819010417">
+    <classShape Id="98ecd24c-b975-4217-b8df-707455abeca7" absoluteBounds="3.5, 1, 2, 1.7535424804687498">
       <DataClassMoniker Name="/VerzusLinqSqlDataContext/VerzusItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="5dada036-ae0a-4b09-9987-1e18f64bb40f" absoluteBounds="3.515, 1.71, 1.9700000000000002, 0.86484781901041663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="01611468-f8f6-4cec-9c4d-38f7dbc217ca" absoluteBounds="3.515, 1.46, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 1.96242390950521); (6.25 : 1.96242390950521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 1.87677124023437); (6.25 : 1.87677124023437)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/VerzusLinqSqlDataContext/VerzusItem/VerzusItem_Verzus" />
       <nodes>
-        <classShapeMoniker Id="ea98d290-4bc8-4408-94ea-73956719e689" />
-        <classShapeMoniker Id="b0c6750d-7d6a-42a0-ba64-44303498b439" />
+        <classShapeMoniker Id="98ecd24c-b975-4217-b8df-707455abeca7" />
+        <classShapeMoniker Id="abf01ee4-f623-4ef8-875a-989b8e403300" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 1.5437119547526); (6.25 : 1.5437119547526)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 1.37588562011719); (6.25 : 1.37588562011719)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/VerzusLinqSqlDataContext/VerzusItem/VerzusItem_Verzus1" />
       <nodes>
-        <classShapeMoniker Id="ea98d290-4bc8-4408-94ea-73956719e689" />
-        <classShapeMoniker Id="b0c6750d-7d6a-42a0-ba64-44303498b439" />
+        <classShapeMoniker Id="98ecd24c-b975-4217-b8df-707455abeca7" />
+        <classShapeMoniker Id="abf01ee4-f623-4ef8-875a-989b8e403300" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.38113586425781); (6.25 : 2.38113586425781)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.37765686035156); (6.25 : 2.37765686035156)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/VerzusLinqSqlDataContext/VerzusItem/VerzusItem_Verzus2" />
       <nodes>
-        <classShapeMoniker Id="ea98d290-4bc8-4408-94ea-73956719e689" />
-        <classShapeMoniker Id="b0c6750d-7d6a-42a0-ba64-44303498b439" />
+        <classShapeMoniker Id="98ecd24c-b975-4217-b8df-707455abeca7" />
+        <classShapeMoniker Id="abf01ee4-f623-4ef8-875a-989b8e403300" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 1.97199625651042); (3.5 : 1.97199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 1.92307657877604); (3.5 : 1.92307657877604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/VerzusLinqSqlDataContext/VerzusItemType/VerzusItemType_VerzusItem" />
       <nodes>
-        <classShapeMoniker Id="4f49c915-a245-4a5f-80ee-531b82d245bc" />
-        <classShapeMoniker Id="ea98d290-4bc8-4408-94ea-73956719e689" />
+        <classShapeMoniker Id="a165195e-2bb0-454b-a2da-f87569556f85" />
+        <classShapeMoniker Id="98ecd24c-b975-4217-b8df-707455abeca7" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

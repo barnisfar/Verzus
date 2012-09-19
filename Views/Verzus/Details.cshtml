@@ -2,8 +2,8 @@
     ViewBag.Title = "Details";
 }
 
-<h1>@ViewBag.item1Content vs @ViewBag.item2Content</h1>
-@ViewBag.date
+<a href="@Url.Action("Get", "Verzus", new { id = @ViewBag.urlKey })" title="@ViewBag.item1Content vs @ViewBag.item2Content"><h1>@ViewBag.item1Content vs @ViewBag.item2Content</h1></a>
+<span>Last added @ViewBag.date</span>
 
 <p>When it comes to 
     <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="@ViewBag.itemCId" /> 
@@ -18,7 +18,10 @@
     <input value="@ViewBag.item2Content" data-vs-id="verzusitem2" data-vs-more="" data-vs-more-info="more-item2" name="verzusitem2text" data-auto="1" data-min-len="0" data-action="SearchByIds" id="verzusitem2text" type="text" /> !
     <span id="more-item2" data-context="more"></span>
 </p>
-<div id="details"></div>
+<div class="details">
+    <div id="agree-pool"></div>
+    <div id="disagree-pool"></div>
+</div>
 
 @section Verzusscripts {
 <script type="text/javascript">    
@@ -31,30 +34,30 @@
     $(document).ready(function() {
 
         $.ajax({
-            url: "@Url.Action("Search", "Verzus")",
+            url: "@Url.Action("JSearch", "Verzus")",
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: "{ item1: "+item1+", item2: "+item2+", context:"+itemC+" }",
             success: function (data) {
-                listStats(data, $('#details'), "person(s) agree(s)");
+                listStats(data, $('#agree-pool'), "person(s) agree(s)");
             }
         });
 
         $.ajax({
-            url: "@Url.Action("Search", "Verzus")",
+            url: "@Url.Action("JSearch", "Verzus")",
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: "{ item1: "+item2+", item2: "+item1+", context:"+itemC+" }",
             success: function (data) {
-                listStats(data, $('#details'), "person(s) disagree(s)");
+                listStats(data, $('#disagree-pool'), "person(s) disagree(s)");
             }
         });
 
         function generateOptions(input, item1, item2, context) {
             $.ajax({
-                url: "@Url.Action("Search", "Verzus")",
+                url: "@Url.Action("JSearch", "Verzus")",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
