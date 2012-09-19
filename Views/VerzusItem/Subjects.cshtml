@@ -1,0 +1,6 @@
+﻿
+<h2>@ViewBag.Title</h2>
+
+@foreach (var item in ViewBag.VerzusItems) {
+    <a href="@Url.Action("Search", "Verzus", new {itemContent=item.ItemContent})" title="">@item.ItemContent</a>
+}

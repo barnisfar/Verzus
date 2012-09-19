@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Verzus containing the subject @ViewBag.ItemContent</h2>
+
+@foreach (var verzus in ViewBag.VerzusList)
+{
+    <a href="@Url.Action("Details", "Verzus", new {urlKey=verzus.vs.VerzusUrlKey, context=verzus.vs.VerzusItemContext})" title="">
+        @verzus.vsi1.ItemContent vs. @verzus.vsi2.ItemContent about @verzus.vsiC.ItemContent
+    </a>
+}
