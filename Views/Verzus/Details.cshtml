@@ -7,15 +7,15 @@
 
 <p>When it comes to 
     <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="@ViewBag.itemCId" /> 
-    <input value="@ViewBag.itemCContent" data-vs-id="verzusitemcontext" data-vs-more="" data-vs-more-info="more-context" name="verzusitemcontexttext" data-auto="1" data-min-len="0" data-action="SearchByIds" id="verzusitemcontexttext" type="text" />
+    <input value="@ViewBag.itemCContent" data-vs-id="verzusitemcontext" data-vs-more="" data-vs-more-info="more-context" name="verzusitemcontexttext" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitemcontexttext" type="text" />
     <span id="more-context" data-context="more"></span>
     We'd definitely choose 
     <input id="verzusitem1" name="verzusitem1" type="hidden" value="@ViewBag.item1Id" />
-    <input value="@ViewBag.item1Content" data-vs-id="verzusitem1" data-vs-more="" data-vs-more-info="more-item1" name="verzusitem1text" data-auto="1" data-min-len="0" data-action="SearchByIds" id="verzusitem1text" type="text" />
+    <input value="@ViewBag.item1Content" data-vs-id="verzusitem1" data-vs-more="" data-vs-more-info="more-item1" name="verzusitem1text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem1text" type="text" />
     <span id="more-item1" data-context="more"></span>
     over 
     <input id="verzusitem2" name="verzusitem2" type="hidden" value="@ViewBag.item2Id" />
-    <input value="@ViewBag.item2Content" data-vs-id="verzusitem2" data-vs-more="" data-vs-more-info="more-item2" name="verzusitem2text" data-auto="1" data-min-len="0" data-action="SearchByIds" id="verzusitem2text" type="text" /> !
+    <input value="@ViewBag.item2Content" data-vs-id="verzusitem2" data-vs-more="" data-vs-more-info="more-item2" name="verzusitem2text" data-auto="0" data-min-len="0" data-action="SearchByIds" id="verzusitem2text" type="text" /> !
     <span id="more-item2" data-context="more"></span>
 </p>
 <div class="details">
@@ -23,7 +23,7 @@
     <div id="disagree-pool"></div>
 </div>
 
-@section Verzusscripts {
+@section Scripts {
 <script type="text/javascript">    
     
     var item1 = @ViewBag.item1Id;
@@ -55,16 +55,18 @@
             }
         });
 
-        function generateOptions(input, item1, item2, context) {
+        function generateOptions(input, _item1, _item2, _itemC) {
             $.ajax({
                 url: "@Url.Action("JSearch", "Verzus")",
                 type: "POST",
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                data: "{ item1: "+item1+", item2: "+item2+", context:0 }",
+                data: "{ item1: "+_item1+", item2: "+_item2+", context:"+_itemC+" }",
                 success: function (data) {
                     if (data.length > 1) {
                         $('#'+input.attr('data-vs-more-info')).html("(and "+(data.length-1)+" other matters)");
+                        input.attr('data-auto', 1);
+                        createAutoCompleteOnFocus(input);
                         var ids = Array();
                         for (var i in data) {
                             ids.push(data[i].VerzusItemContext);
@@ -74,7 +76,9 @@
                 }
             });
         }
-        generateOptions($(''), item1, item2, context);
+        generateOptions($('#verzusitemcontexttext'), item1, item2, 0);
+        generateOptions($('#verzusitem1text'), 0, item2, itemC);
+        generateOptions($('#verzusitem2text'), item1, 0, itemC);
 
     });
 

@@ -56,26 +56,23 @@
         @Scripts.Render("~/bundles/jqueryui")
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                
-                var cache = {},
+            var cache = {},
                     lastXhr;
-                
 
-                $("input[data-auto]").each(function (i, el) {
-                    $(el).focus(function (e) {
-                        var currSelect = $(this);
-                        currSelect.autocomplete({
-                            minLength: currSelect.attr('data-min-len'),
-                            source: function (request, response) {
-                                var term = request.term;
-                                if (term in cache) {
-                                    response(cache[term]);
-                                    return;
-                                }
+            function createAutoCompleteOnFocus(el) {
+                $(el).focus(function (e) {
+                    var currSelect = $(this);
+                    currSelect.autocomplete({
+                        minLength: currSelect.attr('data-min-len'),
+                        source: function (request, response) {
+                            var term = request.term;
+                            if (term in cache) {
+                                response(cache[term]);
+                                return;
+                            }
 
-                                lastXhr = $.ajax({
-                                    url: "@Url.Content("~")" + "VerzusItem/" + currSelect.attr('data-action') + "/" + term,
+                            lastXhr = $.ajax({
+                                url: "@Url.Content("~")" + "VerzusItem/" + currSelect.attr('data-action') + "/" + term,
                                     type: "POST",
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",
@@ -115,12 +112,18 @@
                                 .appendTo(ul);
                         };
                     });
+            }
+
+            $(document).ready(function () {
+              
+                $("input[data-auto=1]").each(function (i, el) {
+                    createAutoCompleteOnFocus(el);
                 });
+  
             });
 
         </script>
 
         @RenderSection("scripts", required: false)
-        @RenderSection("verzusscripts", required: false)
     </body>
 </html>
