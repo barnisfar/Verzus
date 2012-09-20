@@ -737,8 +737,8 @@ tr.pager td {
         width: auto;
     }
 
-    /* footer
-    ----------------------------------------------------------*/
+    /* footer ----------------------------------------------------------*/
+
     footer .float-left,
     footer .float-right {
         float: none;
@@ -750,47 +750,56 @@ tr.pager td {
         padding: 10px 0;
     }
 
-        footer p {
-            margin: 0;
-        }
+    footer p {
+        margin: 0;
+    }
 
-        ul#social {
-            padding: 0;
-            margin: 0;
-        }
+    ul#social {
+        padding: 0;
+        margin: 0;
+    }
 
-        a.facebook, a.twitter {
-            background: none;
-            display: inline;
-            float: none;
-            padding-left: 0;
-            text-indent: 0;
-        }
+    a.facebook, a.twitter {
+        background: none;
+        display: inline;
+        float: none;
+        padding-left: 0;
+        text-indent: 0;
+    }
 }
-/* Verzus Items */
+
+
+/* Verzus ----------------------------------------------- */
+
 .verzus-item {
     display:inline-block;
     height:120px;
-    width:auto;
+    width:180px;
     background:#555;
     padding:10px;
 }
 
-.verzus-item input {
+.verzus-item input, .verzus-item a {
     font-family:"Segoe UI", Verdana, Helvetica, Sans-Serif;
     font-size:30px;
     font-weight:bold;
     border:none;
     color:#fff;
     background:none;
-    width:180px;
+    display:block;
+    float:left;
+    white-space:normal;
+    width:100%;
 }
 
-    .verzus-item span {
-        font-family:"Segoe UI", Verdana, Helvetica, Sans-Serif;
-        font-size:14px;
-        
+    .verzus-item input {
+    
     }
+
+.verzus-item span {
+    font-family:"Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-size:14px;
+}
 
 .verzus p {
     font-family:Georgia, serif;

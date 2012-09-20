@@ -11,18 +11,22 @@
     <p>When it comes to 
         <span class="verzus-item">
             <input id="verzusitemcontext" name="verzusitemcontext" type="hidden" value="0" /> 
-            <input data-vs-id="verzusitemcontext" name="verzusitemcontexttext" data-auto="1" data-min-len="2" data-action="Search" id="verzusitemcontexttext" type="text" />
+            <input data-preview-area="vsiC-preview" data-vs-id="verzusitemcontext" name="verzusitemcontexttext" data-auto="1" data-min-len="2" data-action="Search" id="verzusitemcontexttext" type="text" />
+            <span id="vsiC-preview"></span>
         </span>
         I'd definitely choose 
         <span class="verzus-item">
             <input id="verzusitem1" name="verzusitem1" type="hidden" value="0" />
-            <input data-vs-id="verzusitem1" name="verzusitem1text" data-auto="1" data-min-len="2" data-action="Search" id="verzusitem1text" type="text" />
+            <input data-preview-area="vsi1-preview" data-vs-id="verzusitem1" name="verzusitem1text" data-auto="1" data-min-len="2" data-action="Search" id="verzusitem1text" type="text" />
+            <span id="vsi1-preview"></span>
         </span>
         over 
         <span class="verzus-item">
             <input id="verzusitem2" name="verzusitem2" type="hidden" value="0" />
-            <input data-vs-id="verzusitem2" name="verzusitem2text" data-auto="1" data-min-len="2" data-action="Search" id="verzusitem2text" type="text" /> !
+            <input data-preview-area="vsi2-preview" data-vs-id="verzusitem2" name="verzusitem2text" data-auto="1" data-min-len="2" data-action="Search" id="verzusitem2text" type="text" />
+            <span id="vsi2-preview"></span>
         </span>
+        !
         <button type="submit">Create Verzus</button>
     </p>
 
@@ -32,4 +36,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    
 }

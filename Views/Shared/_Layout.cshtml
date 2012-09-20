@@ -54,12 +54,44 @@
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
-
         <script type="text/javascript">
+
+            function searchWeb(input) {
+                try {
+                    var url = '@Url.Action("GetResult", "VerzusItem")';
+                    var term = $(input).val();
+                    $.post(url, { term: term },
+                   function (data) {
+                       var obj = $.parseJSON(data);
+                       var strHtml = "";
+                       if (obj.items.length > 0) {
+                           var gPage = obj.items[0];
+                           //console.dir(gPage);
+                           strHtml = strHtml + "<h3 style=\"border-style:none\"><a href=\"" + gPage.link + "\" title=\"" + gPage.title + "\">" + gPage.title + "</a></h3>";
+                           strHtml = strHtml + "<label>" + gPage.snippet + "</label>";
+                           if (gPage.pagemap) {
+                               if (gPage.pagemap.cse_thumbnail) {
+                                   var thumb = gPage.pagemap.cse_thumbnail[0];
+                                   strHtml = strHtml + "<img src=\"" + thumb.src + "\" height=\"" + thumb.height + "\" width=\"" + thumb.width + "\" alt=\"" + gPage.title + "\"/>";
+                               }
+                           }
+
+                           $('#' + $(input).attr('data-preview-area')).html(strHtml);
+                       }
+                   });
+                } catch (err) { }
+            }
+
             var cache = {},
                     lastXhr;
 
             function createAutoCompleteOnFocus(el) {
+                $(el).blur(function (e) { 
+                    var filter= /^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i;
+                    if(filter.test($(this).val())){
+                        searchWeb(this);
+                    }
+                });
                 $(el).focus(function (e) {
                     var currSelect = $(this);
                     currSelect.autocomplete({
@@ -123,6 +155,9 @@
             });
 
         </script>
+
+        
+
 
         @RenderSection("scripts", required: false)
     </body>
