@@ -2,11 +2,19 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Verzus containing the subject @ViewBag.ItemContent</h2>
+<div class="verzus">
 
-@foreach (var verzus in ViewBag.VerzusList)
-{
-    <a href="@Url.Action("Details", "Verzus", new {urlKey=verzus.vs.VerzusUrlKey, context=verzus.vs.VerzusItemContext})" title="">
-        @verzus.vsi1.ItemContent vs. @verzus.vsi2.ItemContent about @verzus.vsiC.ItemContent
-    </a>
-}
+    <h2>Verzus containing the subject @ViewBag.ItemContent</h2>
+
+    <div class="verzus-list">
+
+    @foreach (var verzus in ViewBag.VerzusList)
+    {
+        <a href="@Url.Action("Details", "Verzus", new {urlKey=verzus.vs.VerzusUrlKey, context=verzus.vs.VerzusItemContext})" title="@verzus.vsi1.ItemContent vs. @verzus.vsi2.ItemContent about @verzus.vsiC.ItemContent">
+            <span class="verzus-item">@verzus.vsi1.ItemContent</span> vs. <span class="verzus-item">@verzus.vsi2.ItemContent</span> about <span class="verzus-item">@verzus.vsiC.ItemContent</span>
+        </a>
+    }
+
+    </div>
+
+</div>

@@ -63,11 +63,14 @@
                     $.post(url, { term: term },
                    function (data) {
                        var obj = $.parseJSON(data);
+                       var res = obj[0];
+                       var img = obj[1];
                        var strHtml = "";
-                       if (obj.items.length > 0) {
-                           var gPage = obj.items[0];
-                           //console.dir(gPage);
-                           strHtml = strHtml + "<h3 style=\"border-style:none\"><a href=\"" + gPage.link + "\" title=\"" + gPage.title + "\">" + gPage.title + "</a></h3>";
+                       console.dir(img);
+
+                       if (res.items.length > 0) {
+                           var gPage = res.items[0];
+                           strHtml = strHtml + "<h3><a href=\"" + gPage.link + "\" title=\"" + gPage.title + "\">" + gPage.title + "</a></h3>";
                            strHtml = strHtml + "<label>" + gPage.snippet + "</label>";
                            if (gPage.pagemap) {
                                if (gPage.pagemap.cse_thumbnail) {
@@ -151,6 +154,12 @@
                 $("input[data-auto=1]").each(function (i, el) {
                     createAutoCompleteOnFocus(el);
                 });
+
+                $(".verzus-item input, .verzus-item a").each(function (i, el) {
+                    var len = $(el).text().length;
+                    $(el).css('font-size', (45 - (len > 15 ? 15 : len)) + 'px');
+                });
+
   
             });
 

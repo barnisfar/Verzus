@@ -186,9 +186,12 @@ namespace Verzus.Controllers
             var result = web.DownloadString(String.Format(
                    "https://www.googleapis.com/customsearch/v1?key=AIzaSyBa5X9iZRvFlNr6-8q9roX_exXbI7BXlO0&cx=013036536707430787589:_pqjad5hr1a&alt=json&num=1&q={0}",
                    searchTerm));
+            var imgResult = web.DownloadString(String.Format(
+                   "https://www.googleapis.com/customsearch/v1?key=AIzaSyBa5X9iZRvFlNr6-8q9roX_exXbI7BXlO0&cx=013036536707430787589:_pqjad5hr1a&alt=json&num=1&q=site:{0}",
+                   searchTerm));
 
             web.Dispose();
-            return Json(result);
+            return Json("[" + result + "," + imgResult + "]");
         }
     }
 }
